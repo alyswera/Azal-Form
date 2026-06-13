@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدخال وتسجيل الأوردرات الجديدة</title>
+    <title>تسجيل الأوردرات الجديدة</title>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%230284c7'/><stop offset='100%25' stop-color='%230369a1'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><path d='M35 30h30c2.2 0 4 1.8 4 4v32c0 2.2-1.8 4-4 4H35c-2.2 0-4-1.8-4-4V34c0-2.2 2.2-4 4-4zm4 10h22v4H39v-4zm0 10h22v4H39v-4zm0 10h14v4H39v-4z' fill='%23ffffff'/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232563eb'/><stop offset='100%25' stop-color='%2338bdf8'/></linearGradient></defs><path d='M20 25h10l8 40h42l8-30H34' fill='none' stroke='url(%23b)' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/><circle cx='42' cy='78' r='7' fill='%231d4ed8'/><circle cx='74' cy='78' r='7' fill='%231d4ed8'/><path d='M45 35h25M57.5 22.5v25' stroke='%230284c7' stroke-width='5' stroke-linecap='round'/></svg>">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,9 +24,9 @@
     <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
         
         <div class="bg-gradient-to-r from-blue-700 to-sky-600 text-white p-5 text-center relative shadow-md">
-            <div class="absolute right-6 top-5 text-3xl opacity-20"><i class="fa-solid fa-cart-plus"></i></div>
+            <div class="absolute right-6 top-5 text-3xl opacity-20"><i class="fa-solid fa-basket-shopping"></i></div>
             <h1 class="text-2xl font-extrabold tracking-tight">إدخال وتسجيل الأوردرات الجديدة</h1>
-            <p class="text-sky-100 text-sm mt-1 font-medium">قم بعمل بيانات العميل وإضافة المنتجات المتعددة للأوردر دفعة واحدة</p>
+            <p class="text-sky-100 text-sm mt-1 font-medium">نظام الترحيل الفوري لصفحة المبيعات بالشيت المباشر</p>
         </div>
 
         <form id="order-form" onsubmit="handleOrderSubmit(event)" class="p-6 space-y-6">
@@ -36,7 +36,7 @@
                     <i class="fa-solid fa-user-tag text-base"></i> البيانات الأساسية للطلب والعميل
                 </h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1.5">اسم العميل الثنائي أو الثلاثي <span class="text-red-500">*</span></label>
                         <div class="relative">
@@ -55,17 +55,10 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1.5">كود الموظف المسؤول <span class="text-red-500">*</span></label>
-                        <select id="employee-code" required class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors cursor-pointer">
-                            <option value="">-- اختر كودك الشخصي --</option>
-                            <option value="CC 1">CC 1</option>
-                            <option value="CC 2">CC 2</option>
-                            <option value="CC 3">CC 3</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5">تاريخ تسجيل الأوردر <span class="text-red-500">*</span></label>
-                        <input type="date" id="order-date" required class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 text-center transition-colors">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-id-badge"></i></span>
+                            <input type="text" id="employee-code" required placeholder="اكتب كودك هنا (مثال: CC 1)" class="w-full border-2 border-slate-300 rounded-xl pr-9 pl-3 py-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors">
+                        </div>
                     </div>
                 </div>
 
@@ -100,7 +93,7 @@
                     </div>
                     
                     <div class="lg:col-span-3">
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5">عنوان العميل بالتفصيل (المركز / اسم الشارع / رقم المنزل) <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">عنوان العميل بالتفصيل <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-map-location-dot"></i></span>
                             <input type="text" id="customer-address" required placeholder="اكتب العنوان السكني الكامل والواضح هنا لتسهيل عملية الشحن والتوصيل..." class="w-full border-2 border-slate-300 rounded-xl pr-9 pl-3 py-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors">
@@ -114,27 +107,22 @@
                 <div class="lg:col-span-2 border-2 border-slate-200 rounded-2xl p-4 bg-white shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-3 border-b border-slate-100 pb-2">
-                            <h3 class="text-sm font-black text-sky-800"><i class="fa-solid fa-basket-shopping ml-1"></i> قائمة منتجات الأوردر الحالي</h3>
-                            <button type="button" onclick="addProductRow()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-1.5 px-3 rounded-lg transition-colors cursor-pointer shadow flex items-center gap-1">
+                            <h3 class="text-sm font-black text-sky-800"><i class="fa-solid fa-cart-shopping ml-1 text-blue-600"></i> قائمة المنتجات المطلوبة</h3>
+                            <button type="button" onclick="addProductRow()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-1.5 px-3 rounded-lg transition-colors cursor-pointer shadow flex items-center gap-1">
                                 <i class="fa-solid fa-plus"></i> إضافة منتج آخر +
                             </button>
                         </div>
                         
-                        <div id="products-container" class="space-y-3 max-h-[160px] overflow-y-auto pr-1">
+                        <div id="products-container" class="space-y-3 max-h-[180px] overflow-y-auto pr-1">
                             <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200">
-                                <div class="col-span-6">
-                                    <select onchange="updateRowPrice(this)" required class="product-select w-full border border-slate-300 rounded-lg p-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900 text-right">
-                                        <option value="">-- اختر المنتج من المخزون --</option>
-                                        <option value="عسل سدر" data-price="300">عسل سدر (300 ج.م)</option>
-                                        <option value="عسل مصري" data-price="400">عسل مصري (400 ج.م)</option>
-                                        <option value="عسل يمني" data-price="300">عسل يمني (300 ج.م)</option>
-                                    </select>
+                                <div class="col-span-8">
+                                    <div class="relative">
+                                        <span class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-box-open"></i></span>
+                                        <input type="text" required class="product-name-input w-full border border-slate-300 rounded-lg pr-8 pl-2 py-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="اكتب اسم المنتج يدوياً...">
+                                    </div>
                                 </div>
                                 <div class="col-span-3">
-                                    <input type="number" min="1" value="1" oninput="calculateTotalOrderAccount()" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
-                                </div>
-                                <div class="col-span-2">
-                                    <input type="text" readonly class="product-price-hidden w-full border border-slate-200 bg-slate-100 text-slate-500 rounded-lg p-1.5 text-xs font-black text-center" placeholder="السعر">
+                                    <input type="number" min="1" value="1" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
                                 </div>
                                 <div class="col-span-1 text-center">
                                     <button type="button" onclick="removeProductRow(this)" class="text-red-500 hover:text-red-700 transition-colors cursor-pointer text-sm"><i class="fa-solid fa-trash-can"></i></button>
@@ -142,25 +130,18 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="mt-4 p-3 bg-sky-50 border border-sky-200 rounded-xl flex justify-between items-center">
-                        <span class="text-xs font-extrabold text-sky-900">إجمالي الحساب المستحق للأوردر:</span>
-                        <div class="text-lg font-black text-sky-700 bg-white px-4 py-1.5 rounded-lg border border-sky-300 shadow-sm">
-                            <span id="total-order-price">0</span> ج.م
-                        </div>
-                    </div>
                 </div>
 
                 <div class="border-2 border-slate-200 rounded-2xl p-4 bg-slate-50/50 shadow-sm flex flex-col justify-between">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5"><i class="fa-solid fa-comment-dots ml-1 text-slate-500"></i> أي ملاحظات إضافية خاصة بالطلب</label>
-                        <textarea id="order-notes" rows="3" placeholder="اكتب هنا أي تفاصيل أو شروط خاصة بالشحن أو العميل إن وجدت..." class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 text-right resize-none"></textarea>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5"><i class="fa-solid fa-comment-dots ml-1 text-slate-500"></i> ملاحظات إضافية على الأوردر</label>
+                        <textarea id="order-notes" rows="3" placeholder="اكتب هنا أي تفاصيل أو شروط خاصة بالعميل أو تسليم الأوردر..." class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 text-right resize-none"></textarea>
                     </div>
 
                     <div class="grid grid-cols-4 gap-2 mt-4">
                         <button type="button" onclick="resetOrderForm()" class="col-span-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs py-3 rounded-xl transition-colors cursor-pointer shadow-sm">تفريغ</button>
                         <button type="submit" id="submit-btn" class="col-span-3 bg-gradient-to-r from-blue-700 to-sky-600 hover:from-blue-800 hover:to-sky-700 text-white font-black text-xs py-3 rounded-xl transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-cloud-arrow-up"></i> إرسال وترحيل الأوردر فوراً للشيت
+                            <i class="fa-solid fa-cloud-arrow-up"></i> إرسال وترحيل الأوردر للشيت
                         </button>
                     </div>
                 </div>
@@ -173,32 +154,22 @@
     </div>
 
     <script>
-        // ضع رابط الـ Web App التابع لـ Google Apps Script هنا لمزامنة المبيعات
+        // ضع رابط الـ Web App التابع لـ Google Apps Script الخاص بك هنا لمزامنة جدول المبيعات فوراً
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpCXaJZDPM_QdmKKj0lNXETIcYoQssnqS7B0tQcHooQ9iWDHVijqqnjl6XPZ6EJld4ig/exec";
 
-        window.addEventListener('DOMContentLoaded', () => {
-            // تعيين تاريخ اليوم كقيمة افتراضية مريحة للموظف
-            document.getElementById('order-date').value = new Date().toISOString().split('T')[0];
-        });
-
-        // دالة ديناميكية لإضافة سطر منتج جديد بقائمته المستقلة
+        // دالة ديناميكية لإضافة سطر منتج نصي جديد بالكامل
         function addProductRow() {
             const container = document.getElementById('products-container');
             const rowHtml = `
                 <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200 opacity-0 transition-all duration-300" style="opacity: 1;">
-                    <div class="col-span-6">
-                        <select onchange="updateRowPrice(this)" required class="product-select w-full border border-slate-300 rounded-lg p-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900 text-right">
-                            <option value="">-- اختر المنتج من المخزون --</option>
-                            <option value="عسل سدر" data-price="300">عسل سدر (300 ج.م)</option>
-                            <option value="عسل مصري" data-price="400">عسل مصري (400 ج.م)</option>
-                            <option value="عسل يمني" data-price="300">عسل يمني (300 ج.م)</option>
-                        </select>
+                    <div class="col-span-8">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-box-open"></i></span>
+                            <input type="text" required class="product-name-input w-full border border-slate-300 rounded-lg pr-8 pl-2 py-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="اكتب اسم المنتج يدوياً...">
+                        </div>
                     </div>
                     <div class="col-span-3">
-                        <input type="number" min="1" value="1" oninput="calculateTotalOrderAccount()" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
-                    </div>
-                    <div class="col-span-2">
-                        <input type="text" readonly class="product-price-hidden w-full border border-slate-200 bg-slate-100 text-slate-500 rounded-lg p-1.5 text-xs font-black text-center" placeholder="السعر">
+                        <input type="number" min="1" value="1" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
                     </div>
                     <div class="col-span-1 text-center">
                         <button type="button" onclick="removeProductRow(this)" class="text-red-500 hover:text-red-700 transition-colors cursor-pointer text-sm"><i class="fa-solid fa-trash-can"></i></button>
@@ -215,38 +186,9 @@
                 return;
             }
             btn.closest('.product-row').remove();
-            calculateTotalOrderAccount();
         }
 
-        function updateRowPrice(selectElement) {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const price = selectedOption.getAttribute('data-price') || "";
-            const row = selectElement.closest('.product-row');
-            row.querySelector('.product-price-hidden').value = price ? price + " ج.م" : "";
-            calculateTotalOrderAccount();
-        }
-
-        // دالة حساب الحساب الإجمالي المستحق تلقائياً للأوردر
-        function calculateTotalOrderAccount() {
-            let grandTotal = 0;
-            const rows = document.querySelectorAll('.product-row');
-            
-            rows.forEach(row => {
-                const select = row.querySelector('.product-select');
-                const qtyInput = row.querySelector('.product-qty');
-                const selectedOption = select.options[select.selectedIndex];
-                
-                if (selectedOption && selectedOption.getAttribute('data-price')) {
-                    const price = parseFloat(selectedOption.getAttribute('data-price'));
-                    const qty = parseFloat(qtyInput.value) || 0;
-                    grandTotal += (price * qty);
-                }
-            });
-            
-            document.getElementById('total-order-price').innerText = grandTotal.toLocaleString();
-        }
-
-        // دالة معالجة وإرسال البيانات بطريقة تضمن الترحيل لصفحة "المبيعات" بالشيت
+        // دالة تجميع ترحيل البيانات المتوافقة مع هيكل أعمدة صفحة المبيعات (تاريخ تلقائي بالسيرفر)
         async function handleOrderSubmit(e) {
             e.preventDefault();
             
@@ -255,88 +197,81 @@
             
             submitBtn.disabled = true;
             statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border animate-pulse bg-blue-50 border-blue-200 text-blue-700 block";
-            statusMsg.innerHTML = `<i class="fa-solid fa-gear animate-spin ml-1"></i> جاري ترحيل الأوردر بالترتيب الهيكلي لصفحة المبيعات بالشيت المباشر...`;
+            statusMsg.innerHTML = `<i class="fa-solid fa-gear animate-spin ml-1"></i> جاري إرسال الأوردر وحفظه في صفحة المبيعات طبقاً لترتيب الأعمدة...`;
 
-            // استخراج وتجميع المنتجات المختارة
+            // تجميع أسماء المنتجات والكميات المكتوبة يدوياً
             const productRows = document.querySelectorAll('.product-row');
             let productNames = [];
             let productQuantities = [];
             
             productRows.forEach(row => {
-                const select = row.querySelector('.product-select');
-                const qty = row.querySelector('.product-qty').value;
-                if(select.value) {
-                    productNames.push(select.value);
-                    productQuantities.push(qty);
+                const nameInput = row.querySelector('.product-name-input');
+                const qtyInput = row.querySelector('.product-qty');
+                if(nameInput.value.trim()) {
+                    productNames.push(nameInput.value.trim());
+                    productQuantities.push(qtyInput.value);
                 }
             });
 
-            // صياغة الكائن تبعا للمسميات والترتيب المتوافق مع عماويد صفحة "المبيعات" (التاريخ، اسم العميل، رقم الهاتف، المنتج، الكمية، المحافظة، العنوان)
+            // إعداد الحزمة لتطابق الأعمدة المقابلة (الاسم، الهاتف، المنتج، الكمية، المحافظة، العنوان، الكود، الملاحظات)
             const orderPayload = {
-                action: "insertNewOrder", // أكشن مخصص للسيرفر لفرز الحركات لصفحة المبيعات
-                date: document.getElementById('order-date').value,
+                action: "insertNewOrder", 
                 customerName: document.getElementById('customer-name').value.trim(),
                 phone: document.getElementById('customer-phone').value.trim(),
-                product: productNames.join(" + "), // دمج المنتجات برابط ناعم
-                quantity: productQuantities.join(" + "), // دمج الكميات المقابلة
+                product: productNames.join(" + "), 
+                quantity: productQuantities.join(" + "), 
                 governorate: document.getElementById('customer-governorate').value,
-                address: document.getElementById('customer-address').value.trim()
+                address: document.getElementById('customer-address').value.trim(),
+                employeeCode: document.getElementById('employee-code').value.trim(),
+                notes: document.getElementById('order-notes').value.trim()
             };
 
             try {
-                // إرسال الـ Payload للسيرفر عن طريق POST Mode المتوافق
+                // ترحيل البيانات عبر الـ POST Mode الآمن
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: JSON.stringify(orderPayload)
                 });
 
-                // إظهار وميض النجاح والأمان الأخضر للموظف
+                // وميض النجاح
                 statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border bg-emerald-50 border-emerald-200 text-emerald-700 block";
-                statusMsg.innerHTML = `<i class="fa-solid fa-circle-check ml-1"></i> تم بنجاح ترحيل الأوردر وحفظه في صفحة "المبيعات" بالشيت الرئيسي المباشر ☁️`;
+                statusMsg.innerHTML = `<i class="fa-solid fa-circle-check ml-1"></i> تم ترحيل وحفظ الأوردر بنجاح في صفحة "المبيعات" مع تسجيل التوقيت تلقائياً بالشيت ☁️`;
                 
-                // إعادة تعيين نموذج الأوردرات ليكون جاهزاً للطلب التالي
                 setTimeout(() => {
                     resetOrderForm();
                     statusMsg.classList.add('hidden');
-                }, 3500);
+                }, 3000);
 
             } catch (error) {
-                console.error("خطأ ترحيل الأوردر:", error);
+                console.error("خطأ الترحيل لشيت المبيعات:", error);
                 statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border bg-red-50 border-red-200 text-red-700 block";
-                statusMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation ml-1"></i> عذراً، فشل الاتصال بالسيرفر أثناء الترحيل. يرجى التحقق من رابط الـ Apps Script الخاص بك.`;
+                statusMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation ml-1"></i> فشل الاتصال بالسيرفر أثناء المزامنة. تفقد كود الـ Apps Script الخاص بك.`;
                 submitBtn.disabled = false;
             }
         }
 
         function resetOrderForm() {
             document.getElementById('order-form').reset();
-            document.getElementById('order-date').value = new Date().toISOString().split('T')[0];
             
-            // تنظيف المنتجات وإرجاع سطر واحد افتراضي نظيف
+            // إعادة تعيين سطر منتج واحد نصي فارغ ونظيف
             const container = document.getElementById('products-container');
             container.innerHTML = `
                 <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200">
-                    <div class="col-span-6">
-                        <select onchange="updateRowPrice(this)" required class="product-select w-full border border-slate-300 rounded-lg p-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900 text-right">
-                            <option value="">-- اختر المنتج من المخزون --</option>
-                            <option value="عسل سدر" data-price="300">عسل سدر (300 ج.م)</option>
-                            <option value="عسل مصري" data-price="400">عسل مصري (400 ج.م)</option>
-                            <option value="عسل يمني" data-price="300">عسل يمني (300 ج.م)</option>
-                        </select>
+                    <div class="col-span-8">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-box-open"></i></span>
+                            <input type="text" required class="product-name-input w-full border border-slate-300 rounded-lg pr-8 pl-2 py-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="اكتب اسم المنتج يدوياً...">
+                        </div>
                     </div>
                     <div class="col-span-3">
-                        <input type="number" min="1" value="1" oninput="calculateTotalOrderAccount()" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
-                    </div>
-                    <div class="col-span-2">
-                        <input type="text" readonly class="product-price-hidden w-full border border-slate-200 bg-slate-100 text-slate-500 rounded-lg p-1.5 text-xs font-black text-center" placeholder="السعر">
+                        <input type="number" min="1" value="1" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
                     </div>
                     <div class="col-span-1 text-center">
                         <button type="button" onclick="removeProductRow(this)" class="text-red-500 hover:text-red-700 transition-colors cursor-pointer text-sm"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
             `;
-            document.getElementById('total-order-price').innerText = "0";
             document.getElementById('submit-btn').disabled = false;
         }
     </script>
