@@ -3,305 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام تسجيل الأوردرات والمبيعات المتعددة</title>
+    <title>إدخال وتسجيل الأوردرات الجديدة</title>
     
-    <!-- تحديث أيقونة التبويب (Favicon) إلى شكل سلة تسوق ملونة ومميزة -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='cartGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%233b82f6'/><stop offset='100%25' stop-color='%2310b981'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='ghostwhite'/><path d='M20 25h10l8 35h36l8-25H35' fill='none' stroke='url(%23cartGrad)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/><circle cx='42' cy='72' r='7' fill='%2310b981'/><circle cx='68' cy='72' r='7' fill='%2310b981'/><path d='M45 35h20m-10-10v20' fill='none' stroke='%233b82f6' stroke-width='4' stroke-linecap='round'/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%230284c7'/><stop offset='100%25' stop-color='%230369a1'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><path d='M35 30h30c2.2 0 4 1.8 4 4v32c0 2.2-1.8 4-4 4H35c-2.2 0-4-1.8-4-4V34c0-2.2 2.2-4 4-4zm4 10h22v4H39v-4zm0 10h22v4H39v-4zm0 10h14v4H39v-4z' fill='%23ffffff'/></svg>">
 
-    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
-        body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 100%); 
+            color: #0f172a; 
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+<body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border-2 border-slate-200 overflow-hidden transition-all">
-        <!-- الرأس الهيكلي للموقع -->
-        <div class="bg-gradient-to-r from-blue-700 to-emerald-600 p-6 text-white text-center relative">
-            <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-2xl mx-auto mb-3 shadow-inner">
-                <i class="fa-solid fa-cart-plus animate-bounce"></i>
-            </div>
-            <h1 class="text-2xl font-black tracking-tight">إدخال وتسجيل الأوردرات الجديدة</h1>
-            <p class="text-white/80 text-xs font-bold mt-1">قم بملء بيانات العميل وإضافة المنتجات المتعددة للأوردر</p>
+    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
+        
+        <div class="bg-gradient-to-r from-blue-700 to-sky-600 text-white p-5 text-center relative shadow-md">
+            <div class="absolute right-6 top-5 text-3xl opacity-20"><i class="fa-solid fa-cart-plus"></i></div>
+            <h1 class="text-2xl font-extrabold tracking-tight">إدخال وتسجيل الأوردرات الجديدة</h1>
+            <p class="text-sky-100 text-sm mt-1 font-medium">قم بعمل بيانات العميل وإضافة المنتجات المتعددة للأوردر دفعة واحدة</p>
         </div>
 
-        <!-- استمارة إدخال البيانات الرئيسية -->
-        <form id="order-form" onsubmit="handleFormSubmit(event)" class="p-6 space-y-5">
+        <form id="order-form" onsubmit="handleOrderSubmit(event)" class="p-6 space-y-6">
             
-            <!-- قسم بيانات العميل والموظف -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-black text-slate-700 mb-1.5"><i class="fa-solid fa-user ml-1 text-slate-400"></i> اسم العميل الثنائي أو الثلاثي *</label>
-                    <input type="text" id="customer-name" required placeholder="مثال: محمد أحمد علي" class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm font-bold text-slate-900 bg-slate-50 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors">
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-inner">
+                <h2 class="text-sm font-black text-blue-800 mb-4 flex items-center gap-2 border-b border-slate-200 pb-2">
+                    <i class="fa-solid fa-user-tag text-base"></i> البيانات الأساسية للطلب والعميل
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">اسم العميل الثنائي أو الثلاثي <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-user"></i></span>
+                            <input type="text" id="customer-name" required placeholder="مثال: محمد أحمد علي" class="w-full border-2 border-slate-300 rounded-xl pr-9 pl-3 py-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">رقم الهاتف المحمول <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-phone"></i></span>
+                            <input type="tel" id="customer-phone" required placeholder="مثال: 01xxxxxxxx" class="w-full border-2 border-slate-300 rounded-xl pr-9 pl-3 py-2.5 text-xs font-bold text-left tracking-wide bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">كود الموظف المسؤول <span class="text-red-500">*</span></label>
+                        <select id="employee-code" required class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors cursor-pointer">
+                            <option value="">-- اختر كودك الشخصي --</option>
+                            <option value="CC 1">CC 1</option>
+                            <option value="CC 2">CC 2</option>
+                            <option value="CC 3">CC 3</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">تاريخ تسجيل الأوردر <span class="text-red-500">*</span></label>
+                        <input type="date" id="order-date" required class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 text-center transition-colors">
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-black text-slate-700 mb-1.5"><i class="fa-solid fa-phone ml-1 text-slate-400"></i> رقم الهاتف المحمول *</label>
-                    <input type="tel" id="customer-phone" required placeholder="مثال: 01xxxxxxxxx" class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm font-bold text-slate-900 bg-slate-50 focus:outline-none focus:border-blue-600 focus:bg-white text-left transition-colors tracking-wider">
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-4">
+                    <div class="lg:col-span-1">
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">المحافظة <span class="text-red-500">*</span></label>
+                        <select id="customer-governorate" required class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors cursor-pointer">
+                            <option value="">-- اختر المحافظة --</option>
+                            <option value="القاهرة">القاهرة</option>
+                            <option value="الجيزة">الجيزة</option>
+                            <option value="القليوبية">القليوبية</option>
+                            <option value="الإسكندرية">الإسكندرية</option>
+                            <option value="الغربية">الغربية</option>
+                            <option value="الدقهلية">الدقهلية</option>
+                            <option value="الشرقية">الشرقية</option>
+                            <option value="المنوفية">المنوفية</option>
+                            <option value="البحيرة">البحيرة</option>
+                            <option value="دمياط">دمياط</option>
+                            <option value="بورسعيد">بورسعيد</option>
+                            <option value="السويس">السويس</option>
+                            <option value="الإسماعيلية">الإسماعيلية</option>
+                            <option value="كفر الشيخ">كفر الشيخ</option>
+                            <option value="الفيوم">الفيوم</option>
+                            <option value="بني سويف">بني سويف</option>
+                            <option value="المنيا">المنيا</option>
+                            <option value="أسيوط">أسيوط</option>
+                            <option value="سوهاج">سوهاج</option>
+                            <option value="قنا">قنا</option>
+                            <option value="الأقصر">الأقصر</option>
+                            <option value="أسوان">أسوان</option>
+                        </select>
+                    </div>
+                    
+                    <div class="lg:col-span-3">
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">عنوان العميل بالتفصيل (المركز / اسم الشارع / رقم المنزل) <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-map-location-dot"></i></span>
+                            <input type="text" id="customer-address" required placeholder="اكتب العنوان السكني الكامل والواضح هنا لتسهيل عملية الشحن والتوصيل..." class="w-full border-2 border-slate-300 rounded-xl pr-9 pl-3 py-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 transition-colors">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-black text-slate-700 mb-1.5"><i class="fa-solid fa-id-badge ml-1 text-slate-400"></i> كود الموظف المسؤول *</label>
-                    <select id="employee-code" required class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm font-bold text-slate-900 bg-slate-50 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors">
-                        <option value="">-- اختر كودك --</option>
-                        <option value="CC 1">CC 1</option>
-                        <option value="CC 2">CC 2</option>
-                        <option value="CC 3">CC 3</option>
-                        <option value="CC 4">CC 4</option>
-                        <option value="CC 5">CC 5</option>
-                    </select>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                
+                <div class="lg:col-span-2 border-2 border-slate-200 rounded-2xl p-4 bg-white shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3 border-b border-slate-100 pb-2">
+                            <h3 class="text-sm font-black text-sky-800"><i class="fa-solid fa-basket-shopping ml-1"></i> قائمة منتجات الأوردر الحالي</h3>
+                            <button type="button" onclick="addProductRow()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-1.5 px-3 rounded-lg transition-colors cursor-pointer shadow flex items-center gap-1">
+                                <i class="fa-solid fa-plus"></i> إضافة منتج آخر +
+                            </button>
+                        </div>
+                        
+                        <div id="products-container" class="space-y-3 max-h-[160px] overflow-y-auto pr-1">
+                            <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200">
+                                <div class="col-span-6">
+                                    <select onchange="updateRowPrice(this)" required class="product-select w-full border border-slate-300 rounded-lg p-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900 text-right">
+                                        <option value="">-- اختر المنتج من المخزون --</option>
+                                        <option value="عسل سدر" data-price="300">عسل سدر (300 ج.م)</option>
+                                        <option value="عسل مصري" data-price="400">عسل مصري (400 ج.م)</option>
+                                        <option value="عسل يمني" data-price="300">عسل يمني (300 ج.م)</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-3">
+                                    <input type="number" min="1" value="1" oninput="calculateTotalOrderAccount()" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
+                                </div>
+                                <div class="col-span-2">
+                                    <input type="text" readonly class="product-price-hidden w-full border border-slate-200 bg-slate-100 text-slate-500 rounded-lg p-1.5 text-xs font-black text-center" placeholder="السعر">
+                                </div>
+                                <div class="col-span-1 text-center">
+                                    <button type="button" onclick="removeProductRow(this)" class="text-red-500 hover:text-red-700 transition-colors cursor-pointer text-sm"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-sky-50 border border-sky-200 rounded-xl flex justify-between items-center">
+                        <span class="text-xs font-extrabold text-sky-900">إجمالي الحساب المستحق للأوردر:</span>
+                        <div class="text-lg font-black text-sky-700 bg-white px-4 py-1.5 rounded-lg border border-sky-300 shadow-sm">
+                            <span id="total-order-price">0</span> ج.م
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-black text-slate-700 mb-1.5"><i class="fa-solid fa-calendar-day ml-1 text-slate-400"></i> تاريخ تسجيل الأوردر *</label>
-                    <input type="date" id="order-date" required class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm font-bold text-slate-900 bg-slate-50 focus:outline-none focus:border-blue-600 focus:bg-white text-center transition-colors">
+
+                <div class="border-2 border-slate-200 rounded-2xl p-4 bg-slate-50/50 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5"><i class="fa-solid fa-comment-dots ml-1 text-slate-500"></i> أي ملاحظات إضافية خاصة بالطلب</label>
+                        <textarea id="order-notes" rows="3" placeholder="اكتب هنا أي تفاصيل أو شروط خاصة بالشحن أو العميل إن وجدت..." class="w-full border-2 border-slate-300 rounded-xl p-2.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-600 text-slate-900 text-right resize-none"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2 mt-4">
+                        <button type="button" onclick="resetOrderForm()" class="col-span-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs py-3 rounded-xl transition-colors cursor-pointer shadow-sm">تفريغ</button>
+                        <button type="submit" id="submit-btn" class="col-span-3 bg-gradient-to-r from-blue-700 to-sky-600 hover:from-blue-800 hover:to-sky-700 text-white font-black text-xs py-3 rounded-xl transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> إرسال وترحيل الأوردر فوراً للشيت
+                        </button>
+                    </div>
                 </div>
+
             </div>
 
-            <!-- حقل المنتجات المتعددة الديناميكي الجديد -->
-            <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 bg-slate-50/50">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-sm font-black text-slate-800"><i class="fa-solid fa-basket-shopping text-emerald-600 ml-1"></i> قائمة منتجات الأوردر الحالي</span>
-                    <button type="button" onclick="addProductRow()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-1.5 px-3 rounded-lg shadow transition-all cursor-pointer flex items-center gap-1">
-                        <i class="fa-solid fa-plus text-[10px]"></i> إضافة منتج آخر +
-                    </button>
-                </div>
+            <div id="action-status-msg" class="hidden p-3 rounded-xl font-bold text-xs text-center border animate-pulse"></div>
 
-                <!-- حاوية الأسطر الديناميكية للمنتجات -->
-                <div id="products-container" class="space-y-3">
-                    <!-- سيتم توليد الأسطر برمجياً هنا، ويوجد سطر افتراضي أول تلقائي عند فتح الصفحة -->
-                </div>
-
-                <!-- شريط الإجمالي الكلي المحسوب حياً ولحظياً -->
-                <div class="mt-4 pt-3 border-t-2 border-slate-200 flex justify-between items-center font-black text-slate-900">
-                    <span class="text-sm">إجمالي الحساب المستحق للأوردر:</span>
-                    <span class="text-lg text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-xl"><span id="grand-total-display">0</span> ج.م</span>
-                </div>
-            </div>
-
-            <!-- حقل الملاحظات التمهيدية الاختيارية -->
-            <div>
-                <label class="block text-xs font-black text-slate-700 mb-1.5"><i class="fa-solid fa-comment-dots ml-1 text-slate-400"></i> أي ملاحظات إضافية خاصة بالطلب</label>
-                <textarea id="order-notes" rows="2" placeholder="اكتب هنا أي تفاصيل أو شروط خاصة بالشحن أو العميل..." class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm font-bold text-slate-900 bg-slate-50 focus:outline-none focus:border-blue-600 focus:bg-white text-right transition-colors resize-none"></textarea>
-            </div>
-
-            <!-- أزرار الإجراءات والحفظ الفوري -->
-            <div class="flex gap-3 pt-2">
-                <button type="submit" id="submit-btn" class="flex-1 bg-gradient-to-r from-blue-700 to-emerald-600 hover:from-blue-800 hover:to-emerald-700 text-white font-black text-base py-3.5 rounded-xl transition shadow-lg shadow-blue-100 cursor-pointer flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> إرسال وترحيل الأوردر فوراً للشيت
-                </button>
-                <button type="button" onclick="resetFormToDefault()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-5 rounded-xl text-sm transition border border-slate-300 cursor-pointer">
-                    تفريغ
-                </button>
-            </div>
         </form>
-
-        <!-- لوحة الإشعار بنجاح العملية -->
-        <div id="success-toast" class="hidden bg-emerald-50 border-t-4 border-emerald-600 p-4 text-center text-emerald-800 font-bold text-sm">
-            <i class="fa-solid fa-circle-check text-lg ml-1 text-emerald-600 animate-pulse"></i> تم ترحيل وحفظ الأوردر بمنتجاته المتعددة داخل الشيت الرئيسي بنجاح تام!
-        </div>
     </div>
 
     <script>
-        // ضع رابط الـ Web App (المولّد من قِبل الـ Apps Script الخاص بك) هنا للربط المباشر
+        // ضع رابط الـ Web App التابع لـ Google Apps Script هنا لمزامنة المبيعات
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpCXaJZDPM_QdmKKj0lNXETIcYoQssnqS7B0tQcHooQ9iWDHVijqqnjl6XPZ6EJld4ig/exec";
 
-        // مصفوفة قائمة المنتجات الافتراضية مع أسعارها المبدئية لتسهيل الحساب التلقائي للموظف
-        const PRODUCT_CATALOG = [
-            { name: "منتج أ - كورس متكامل", defaultPrice: 500 },
-            { name: "منتج ب - كورس مكثف", defaultPrice: 300 },
-            { name: "منتج ج - الاستشارة الذهبية", defaultPrice: 1000 },
-            { name: "منتج د - باقة الدعم الممتد", defaultPrice: 750 }
-        ];
-
         window.addEventListener('DOMContentLoaded', () => {
-            // تعيين تاريخ اليوم تلقائياً بداخل حقل التاريخ
+            // تعيين تاريخ اليوم كقيمة افتراضية مريحة للموظف
             document.getElementById('order-date').value = new Date().toISOString().split('T')[0];
-            // إضافة السطر الأول الافتراضي للمنتجات عند فتح واجهة التسجيل
-            addProductRow();
         });
 
-        // دالة إضافة سطر منتج جديد ديناميكي
+        // دالة ديناميكية لإضافة سطر منتج جديد بقائمته المستقلة
         function addProductRow() {
             const container = document.getElementById('products-container');
-            const rowId = 'prod-row-' + Date.now();
-
-            // بناء خيارات قائمة المنتجات من الكتالوج المعتمد
-            let optionsHtml = `<option value="">-- اختر المنتج --</option>`;
-            PRODUCT_CATALOG.forEach(p => {
-                optionsHtml += `<option value="${p.name}" data-price="${p.defaultPrice}">${p.name}</option>`;
-            });
-
-            const rowDiv = document.createElement('div');
-            rowDiv.id = rowId;
-            rowDiv.className = "flex flex-wrap sm:flex-nowrap items-center gap-2 bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm transition-all animate-fadeIn";
-            
-            rowDiv.innerHTML = `
-                <div class="w-full sm:w-1/2">
-                    <select class="product-select w-full border border-slate-300 rounded-lg p-2 font-bold text-xs bg-slate-50 focus:outline-none focus:border-blue-500" onchange="handleProductSelectChange(this)" required>
-                        ${optionsHtml}
-                        <option value="CUSTOM">منتج مخصص / آخر</option>
-                    </select>
-                </div>
-                <div class="w-24">
-                    <input type="number" min="1" value="1" placeholder="الكمية" class="product-qty w-full border border-slate-300 rounded-lg p-2 font-bold text-xs text-center focus:outline-none focus:border-blue-500" oninput="calculateGrandTotal()" required>
-                </div>
-                <div class="w-32">
-                    <input type="number" min="0" placeholder="السعر الفرعي" class="product-price w-full border border-slate-300 rounded-lg p-2 font-bold text-xs text-center focus:outline-none focus:border-blue-500 text-emerald-700" oninput="calculateGrandTotal()" required>
-                </div>
-                <div>
-                    <button type="button" onclick="removeProductRow('${rowId}')" class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition-colors cursor-pointer text-sm" title="حذف المنتج من القائمة">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
+            const rowHtml = `
+                <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200 opacity-0 transition-all duration-300" style="opacity: 1;">
+                    <div class="col-span-6">
+                        <select onchange="updateRowPrice(this)" required class="product-select w-full border border-slate-300 rounded-lg p-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900 text-right">
+                            <option value="">-- اختر المنتج من المخزون --</option>
+                            <option value="عسل سدر" data-price="300">عسل سدر (300 ج.م)</option>
+                            <option value="عسل مصري" data-price="400">عسل مصري (400 ج.م)</option>
+                            <option value="عسل يمني" data-price="300">عسل يمني (300 ج.م)</option>
+                        </select>
+                    </div>
+                    <div class="col-span-3">
+                        <input type="number" min="1" value="1" oninput="calculateTotalOrderAccount()" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
+                    </div>
+                    <div class="col-span-2">
+                        <input type="text" readonly class="product-price-hidden w-full border border-slate-200 bg-slate-100 text-slate-500 rounded-lg p-1.5 text-xs font-black text-center" placeholder="السعر">
+                    </div>
+                    <div class="col-span-1 text-center">
+                        <button type="button" onclick="removeProductRow(this)" class="text-red-500 hover:text-red-700 transition-colors cursor-pointer text-sm"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
                 </div>
             `;
-            container.appendChild(rowDiv);
-            calculateGrandTotal();
+            container.insertAdjacentHTML('beforeend', rowHtml);
         }
 
-        // دالة حذف سطر منتج من القائمة مع منع حذف السطر الأخير لضمان سلامة الهيكل
-        function removeProductRow(rowId) {
-            const container = document.getElementById('products-container');
-            if (container.children.length <= 1) {
-                alert("يجب أن يحتوي الأوردر على منتج واحد على الأقل قبل إرساله!");
+        function removeProductRow(btn) {
+            const rows = document.querySelectorAll('.product-row');
+            if(rows.length === 1) {
+                alert("يجب أن يحتوي الأوردر على منتج واحد على الأقل!");
                 return;
             }
-            const row = document.getElementById(rowId);
-            if (row) {
-                row.remove();
-                calculateGrandTotal();
-            }
+            btn.closest('.product-row').remove();
+            calculateTotalOrderAccount();
         }
 
-        // دالة تغيير المنتج لجلب سعره الرسمي تلقائياً من الكتالوج لتسريع العمل
-        function handleProductSelectChange(selectElement) {
+        function updateRowPrice(selectElement) {
             const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const row = selectElement.closest('[id^="prod-row-"]');
-            const priceInput = row.querySelector('.product-price');
-            
-            if (selectedOption.value === "CUSTOM") {
-                priceInput.value = "";
-                priceInput.readOnly = false;
-                priceInput.focus();
-            } else if (selectedOption.value !== "") {
-                const price = selectedOption.getAttribute('data-price');
-                priceInput.value = price;
-                priceInput.readOnly = false; // السماح للموظف بعمل خصم يدوي إذا رغب
-            } else {
-                priceInput.value = "";
-            }
-            calculateGrandTotal();
+            const price = selectedOption.getAttribute('data-price') || "";
+            const row = selectElement.closest('.product-row');
+            row.querySelector('.product-price-hidden').value = price ? price + " ج.م" : "";
+            calculateTotalOrderAccount();
         }
 
-        // دالة احتساب الإجمالي الكلي واللحظي للأوردر
-        function calculateGrandTotal() {
+        // دالة حساب الحساب الإجمالي المستحق تلقائياً للأوردر
+        function calculateTotalOrderAccount() {
             let grandTotal = 0;
-            const rows = document.getElementById('products-container').children;
+            const rows = document.querySelectorAll('.product-row');
             
-            for (let i = 0; i < rows.length; i++) {
-                const qty = parseFloat(rows[i].querySelector('.product-qty').value) || 0;
-                const price = parseFloat(rows[i].querySelector('.product-price').value) || 0;
-                grandTotal += (qty * price);
-            }
-            document.getElementById('grand-total-display').innerText = grandTotal.toLocaleString('ar-EG');
+            rows.forEach(row => {
+                const select = row.querySelector('.product-select');
+                const qtyInput = row.querySelector('.product-qty');
+                const selectedOption = select.options[select.selectedIndex];
+                
+                if (selectedOption && selectedOption.getAttribute('data-price')) {
+                    const price = parseFloat(selectedOption.getAttribute('data-price'));
+                    const qty = parseFloat(qtyInput.value) || 0;
+                    grandTotal += (price * qty);
+                }
+            });
+            
+            document.getElementById('total-order-price').innerText = grandTotal.toLocaleString();
         }
 
-        // تفريغ الاستمارة وإعادتها للوضع الافتراضي النظيف
-        function resetFormToDefault() {
-            document.getElementById('order-form').reset();
-            document.getElementById('products-container').innerHTML = "";
-            document.getElementById('order-date').value = new Date().toISOString().split('T')[0];
-            addProductRow();
-        }
-
-        // معالجة إرسال الأوردر بمنتجاته وتجميع البيانات المناسبة للشيت
-        async function handleFormSubmit(event) {
-            event.preventDefault();
+        // دالة معالجة وإرسال البيانات بطريقة تضمن الترحيل لصفحة "المبيعات" بالشيت
+        async function handleOrderSubmit(e) {
+            e.preventDefault();
             
             const submitBtn = document.getElementById('submit-btn');
-            const successToast = document.getElementById('success-toast');
+            const statusMsg = document.getElementById('action-status-msg');
             
-            // قراءة البيانات الأساسية للعميل
-            const name = document.getElementById('customer-name').value.trim();
-            const phone = document.getElementById('customer-phone').value.trim();
-            const empCode = document.getElementById('employee-code').value;
-            const date = document.getElementById('order-date').value;
-            const baseNotes = document.getElementById('order-notes').value.trim();
-
-            // تجميع وتغليف كافة السطور المضافة للمنتجات والكميات والأسعار بشكل نصي منسق وبديع
-            const rows = document.getElementById('products-container').children;
-            let productsSummaryArray = [];
-            let totalOrderPrice = 0;
-
-            for (let i = 0; i < rows.length; i++) {
-                const selectElement = rows[i].querySelector('.product-select');
-                let prodName = selectElement.value;
-                if (prodName === "CUSTOM") { prodName = "منتج مخصص"; }
-                
-                const qty = parseInt(rows[i].querySelector('.product-qty').value) || 1;
-                const price = parseFloat(rows[i].querySelector('.product-price').value) || 0;
-                
-                if (!prodName) continue;
-                
-                productsSummaryArray.push(`${prodName} (عدد: ${qty})`);
-                totalOrderPrice += (qty * price);
-            }
-
-            if (productsSummaryArray.length === 0) {
-                alert("برجاء اختيار منتج واحد صحيح على الأقل لتسجيل الأوردر!");
-                return;
-            }
-
-            // دمج المنتجات في سطر واحد مفصل يفهمه موظفو المتابعة واللوحة الفورية
-            const finalProductTypeString = productsSummaryArray.join(" + ");
-            
-            // قفل الزر وتغيير حالته لمنع تكرار الإرسال بطريق الخطأ
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> جاري إرسال وترحيل الأوردر ديناميكياً...`;
-            successToast.classList.add('hidden');
+            statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border animate-pulse bg-blue-50 border-blue-200 text-blue-700 block";
+            statusMsg.innerHTML = `<i class="fa-solid fa-gear animate-spin ml-1"></i> جاري ترحيل الأوردر بالترتيب الهيكلي لصفحة المبيعات بالشيت المباشر...`;
 
-            // تجهيز الكائن النهائي لإرساله إلى الـ Apps Script
+            // استخراج وتجميع المنتجات المختارة
+            const productRows = document.querySelectorAll('.product-row');
+            let productNames = [];
+            let productQuantities = [];
+            
+            productRows.forEach(row => {
+                const select = row.querySelector('.product-select');
+                const qty = row.querySelector('.product-qty').value;
+                if(select.value) {
+                    productNames.push(select.value);
+                    productQuantities.push(qty);
+                }
+            });
+
+            // صياغة الكائن تبعا للمسميات والترتيب المتوافق مع عماويد صفحة "المبيعات" (التاريخ، اسم العميل، رقم الهاتف، المنتج، الكمية، المحافظة، العنوان)
             const orderPayload = {
-                action: "insertOrder", // بارامتر توجيهي للسيرفر للتمييز
-                date: date,
-                customerName: name,
-                phone: phone,
-                productType: finalProductTypeString,
-                price: totalOrderPrice,
-                employeeCode: empCode,
-                status: "لم يتم الرد", // الحالة الافتراضية لأي أوردر مسجل جديد
-                notes: baseNotes,
-                followUpDate: ""
+                action: "insertNewOrder", // أكشن مخصص للسيرفر لفرز الحركات لصفحة المبيعات
+                date: document.getElementById('order-date').value,
+                customerName: document.getElementById('customer-name').value.trim(),
+                phone: document.getElementById('customer-phone').value.trim(),
+                product: productNames.join(" + "), // دمج المنتجات برابط ناعم
+                quantity: productQuantities.join(" + "), // دمج الكميات المقابلة
+                governorate: document.getElementById('customer-governorate').value,
+                address: document.getElementById('customer-address').value.trim()
             };
 
             try {
-                // إرسال الطلب عبر دالة الـ POST إلى الجوجل شيت الرئيسي
+                // إرسال الـ Payload للسيرفر عن طريق POST Mode المتوافق
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderPayload)
                 });
 
-                // إظهار توست النجاح وتفريغ الحقول للاستعداد للأوردر التالي
-                successToast.classList.remove('hidden');
-                resetFormToDefault();
+                // إظهار وميض النجاح والأمان الأخضر للموظف
+                statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border bg-emerald-50 border-emerald-200 text-emerald-700 block";
+                statusMsg.innerHTML = `<i class="fa-solid fa-circle-check ml-1"></i> تم بنجاح ترحيل الأوردر وحفظه في صفحة "المبيعات" بالشيت الرئيسي المباشر ☁️`;
                 
-                // إخفاء إشعار النجاح تلقائياً بعد مرور 5 ثوانٍ
-                setTimeout(() => { successToast.classList.add('hidden'); }, 5000);
+                // إعادة تعيين نموذج الأوردرات ليكون جاهزاً للطلب التالي
+                setTimeout(() => {
+                    resetOrderForm();
+                    statusMsg.classList.add('hidden');
+                }, 3500);
 
             } catch (error) {
                 console.error("خطأ ترحيل الأوردر:", error);
-                alert("حدثت مشكلة أثناء الاتصال بالسيرفر، يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.");
-            } finally {
-                // إعادة فتح زر الإرسال للحالة النشطة الطبيعية
+                statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border bg-red-50 border-red-200 text-red-700 block";
+                statusMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation ml-1"></i> عذراً، فشل الاتصال بالسيرفر أثناء الترحيل. يرجى التحقق من رابط الـ Apps Script الخاص بك.`;
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> إرسال وترحيل الأوردر فوراً للشيت`;
             }
+        }
+
+        function resetOrderForm() {
+            document.getElementById('order-form').reset();
+            document.getElementById('order-date').value = new Date().toISOString().split('T')[0];
+            
+            // تنظيف المنتجات وإرجاع سطر واحد افتراضي نظيف
+            const container = document.getElementById('products-container');
+            container.innerHTML = `
+                <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200">
+                    <div class="col-span-6">
+                        <select onchange="updateRowPrice(this)" required class="product-select w-full border border-slate-300 rounded-lg p-1.5 text-xs font-bold bg-white focus:outline-none focus:border-blue-500 text-slate-900 text-right">
+                            <option value="">-- اختر المنتج من المخزون --</option>
+                            <option value="عسل سدر" data-price="300">عسل سدر (300 ج.م)</option>
+                            <option value="عسل مصري" data-price="400">عسل مصري (400 ج.م)</option>
+                            <option value="عسل يمني" data-price="300">عسل يمني (300 ج.م)</option>
+                        </select>
+                    </div>
+                    <div class="col-span-3">
+                        <input type="number" min="1" value="1" oninput="calculateTotalOrderAccount()" required class="product-qty w-full border border-slate-300 rounded-lg p-1.5 text-xs font-black text-center bg-white focus:outline-none focus:border-blue-500 text-slate-900" placeholder="الكمية">
+                    </div>
+                    <div class="col-span-2">
+                        <input type="text" readonly class="product-price-hidden w-full border border-slate-200 bg-slate-100 text-slate-500 rounded-lg p-1.5 text-xs font-black text-center" placeholder="السعر">
+                    </div>
+                    <div class="col-span-1 text-center">
+                        <button type="button" onclick="removeProductRow(this)" class="text-red-500 hover:text-red-700 transition-colors cursor-pointer text-sm"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('total-order-price').innerText = "0";
+            document.getElementById('submit-btn').disabled = false;
         }
     </script>
 </body>
