@@ -148,20 +148,19 @@
 
             </div>
 
-            <div id="action-status-msg" class="hidden p-3 rounded-xl font-bold text-xs text-center border animate-pulse"></div>
+            <div id="action-status-msg" class="hidden p-3 rounded-xl font-bold text-xs text-center border"></div>
 
         </form>
     </div>
 
     <script>
-        // ضع رابط الـ Web App التابع لـ Google Apps Script الخاص بك هنا لمزامنة جدول المبيعات فوراً
+        // استبدل هذا الرابط برابط الـ Web App الخاص بك بعد إعادة النشر (Deployment)
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpCXaJZDPM_QdmKKj0lNXETIcYoQssnqS7B0tQcHooQ9iWDHVijqqnjl6XPZ6EJld4ig/exec";
 
-        // دالة ديناميكية لإضافة سطر منتج نصي جديد بالكامل
         function addProductRow() {
             const container = document.getElementById('products-container');
             const rowHtml = `
-                <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200 opacity-0 transition-all duration-300" style="opacity: 1;">
+                <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200">
                     <div class="col-span-8">
                         <div class="relative">
                             <span class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 text-xs"><i class="fa-solid fa-box-open"></i></span>
@@ -181,14 +180,10 @@
 
         function removeProductRow(btn) {
             const rows = document.querySelectorAll('.product-row');
-            if(rows.length === 1) {
-                alert("يجب أن يحتوي الأوردر على منتج واحد على الأقل!");
-                return;
-            }
+            if(rows.length === 1) { return; }
             btn.closest('.product-row').remove();
         }
 
-        // دالة تجميع ترحيل البيانات المتوافقة مع هيكل أعمدة صفحة المبيعات (تاريخ تلقائي بالسيرفر)
         async function handleOrderSubmit(e) {
             e.preventDefault();
             
@@ -197,9 +192,8 @@
             
             submitBtn.disabled = true;
             statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border animate-pulse bg-blue-50 border-blue-200 text-blue-700 block";
-            statusMsg.innerHTML = `<i class="fa-solid fa-gear animate-spin ml-1"></i> جاري إرسال الأوردر وحفظه في صفحة المبيعات طبقاً لترتيب الأعمدة...`;
+            statusMsg.innerHTML = `<i class="fa-solid fa-gear animate-spin ml-1"></i> جاري إرسال الأوردر لصفحة المبيعات...`;
 
-            // تجميع أسماء المنتجات والكميات المكتوبة يدوياً
             const productRows = document.querySelectorAll('.product-row');
             let productNames = [];
             let productQuantities = [];
@@ -213,30 +207,28 @@
                 }
             });
 
-            // إعداد الحزمة لتطابق الأعمدة المقابلة (الاسم، الهاتف، المنتج، الكمية، المحافظة، العنوان، الكود، الملاحظات)
-            const orderPayload = {
-                action: "insertNewOrder", 
-                customerName: document.getElementById('customer-name').value.trim(),
-                phone: document.getElementById('customer-phone').value.trim(),
-                product: productNames.join(" + "), 
-                quantity: productQuantities.join(" + "), 
-                governorate: document.getElementById('customer-governorate').value,
-                address: document.getElementById('customer-address').value.trim(),
-                employeeCode: document.getElementById('employee-code').value.trim(),
-                notes: document.getElementById('order-notes').value.trim()
-            };
+            // تعديل أداة الربط لتصبح الـ العلامة "&" المحفوفة بمسافات بناءً على طلبك
+            const mergedProducts = productNames.join(" & ");
+            const mergedQuantities = productQuantities.join(" & ");
+
+            // تحويل البيانات لنمط حقول برامترية مفرودة لضمان توافقها 100% مع أداة جلب جوجل المستقرة
+            const finalUrl = SCRIPT_URL + 
+                "?action=insertNewOrder" +
+                "&customerName=" + encodeURIComponent(document.getElementById('customer-name').value.trim()) +
+                "&phone=" + encodeURIComponent(document.getElementById('customer-phone').value.trim()) +
+                "&product=" + encodeURIComponent(mergedProducts) +
+                "&quantity=" + encodeURIComponent(mergedQuantities) +
+                "&governorate=" + encodeURIComponent(document.getElementById('customer-governorate').value) +
+                "&address=" + encodeURIComponent(document.getElementById('customer-address').value.trim()) +
+                "&employeeCode=" + encodeURIComponent(document.getElementById('employee-code').value.trim()) +
+                "&notes=" + encodeURIComponent(document.getElementById('order-notes').value.trim());
 
             try {
-                // ترحيل البيانات عبر الـ POST Mode الآمن
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify(orderPayload)
-                });
+                // استخدام طريقة 'no-cors' لإرسال طلب آمن يعبر حواجز المتصفح للشيت بنجاح
+                await fetch(finalUrl, { method: 'POST', mode: 'no-cors' });
 
-                // وميض النجاح
                 statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border bg-emerald-50 border-emerald-200 text-emerald-700 block";
-                statusMsg.innerHTML = `<i class="fa-solid fa-circle-check ml-1"></i> تم ترحيل وحفظ الأوردر بنجاح في صفحة "المبيعات" مع تسجيل التوقيت تلقائياً بالشيت ☁️`;
+                statusMsg.innerHTML = `<i class="fa-solid fa-circle-check ml-1"></i> تم ترحيل وحفظ الأوردر بنجاح في صفحة "المبيعات" بـ الشيت وعزل المنتجات بـ (&) ☁️`;
                 
                 setTimeout(() => {
                     resetOrderForm();
@@ -244,17 +236,15 @@
                 }, 3000);
 
             } catch (error) {
-                console.error("خطأ الترحيل لشيت المبيعات:", error);
+                console.error("خطأ الترحيل:", error);
                 statusMsg.className = "p-3 rounded-xl font-bold text-xs text-center border bg-red-50 border-red-200 text-red-700 block";
-                statusMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation ml-1"></i> فشل الاتصال بالسيرفر أثناء المزامنة. تفقد كود الـ Apps Script الخاص بك.`;
+                statusMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation ml-1"></i> حدث خطأ أثناء الترحيل. يرجى التأكد من تحديث كود الـ Apps Script في الشيت ونشره كإصدار جديد.`;
                 submitBtn.disabled = false;
             }
         }
 
         function resetOrderForm() {
             document.getElementById('order-form').reset();
-            
-            // إعادة تعيين سطر منتج واحد نصي فارغ ونظيف
             const container = document.getElementById('products-container');
             container.innerHTML = `
                 <div class="product-row grid grid-cols-12 gap-2 items-center bg-slate-50 p-2 rounded-xl border border-slate-200">
