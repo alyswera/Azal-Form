@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>تسجيل الأوردرات</title>
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23eff6ff"/><path d="M18 20h5l3 18h22l4-13H25" fill="none" stroke="%232563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="29" cy="47" r="3.5" fill="%233b82f6"/><circle cx="46" cy="47" r="3.5" fill="%233b82f6"/><path d="M23 27h27" stroke="%2360a5fa" stroke-width="3" stroke-linecap="round"/></svg>' />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body { font-family: 'Cairo', sans-serif; background: linear-gradient(180deg,#eef4ff 0%,#f8fafc 100%); }
     .card { background:#fff; border:1px solid #e2e8f0; border-radius:24px; box-shadow:0 24px 60px rgba(15,23,42,.08); }
+    .section-card { background:#f8fbff; border:1px solid #dbeafe; border-radius:20px; }
   </style>
 </head>
 <body class="min-h-screen p-4 md:p-6">
@@ -21,155 +22,46 @@
         <h1 class="text-2xl md:text-3xl font-extrabold">نموذج تسجيل الأوردرات</h1>
         <p class="text-slate-300 text-sm mt-1">تسجيل مباشر وترحيل تلقائي إلى صفحة المبيعات</p>
       </div>
-      <div class="hidden md:flex items-center gap-3 text-blue-300"><i class="fa-solid fa-cart-shopping text-3xl"></i></div>
+      <div class="hidden md:flex items-center gap-3 text-blue-300"><i class="fa-solid fa-cart-shopping text-4xl"></i></div>
     </div>
-
     <form id="order-form" class="p-4 md:p-6 space-y-6">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">اسم العميل <span class="text-red-500">*</span></label>
-          <input id="customer-name" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" required>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">رقم الهاتف <span class="text-red-500">*</span></label>
-          <input id="customer-phone" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" required>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">كود الموظف <span class="text-red-500">*</span></label>
-          <input id="employee-code" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" placeholder="مثال: CC01" required>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">المحافظة <span class="text-red-500">*</span></label>
-          <select id="governorate" required class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600">
-            <option value="">اختر المحافظة</option>
-            <option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>الدقهلية</option><option>البحر الأحمر</option><option>البحيرة</option><option>الفيوم</option><option>الغربية</option><option>الإسماعيلية</option><option>المنوفية</option><option>المنيا</option><option>القليوبية</option><option>الوادي الجديد</option><option>السويس</option><option>اسوان</option><option>اسيوط</option><option>بني سويف</option><option>بورسعيد</option><option>دمياط</option><option>الشرقية</option><option>جنوب سيناء</option><option>كفر الشيخ</option><option>مطروح</option><option>الأقصر</option><option>قنا</option><option>شمال سيناء</option><option>سوهاج</option>
-          </select>
+      <div class="section-card p-5 md:p-6 space-y-4">
+        <div class="flex items-center gap-3 mb-1"><div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fa-solid fa-user"></i></div><div><h2 class="text-lg font-extrabold text-slate-800">بيانات العميل والشحن</h2><p class="text-sm text-slate-500">الاسم والهاتف والمحافظة والعنوان</p></div></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div><label class="block text-xs font-bold text-slate-700 mb-1.5">اسم العميل <span class="text-red-500">*</span></label><input id="customer-name" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" required></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1.5">رقم الهاتف <span class="text-red-500">*</span></label><input id="customer-phone" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" required></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1.5">المحافظة <span class="text-red-500">*</span></label><select id="governorate" required class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600"><option value="">اختر المحافظة</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>الدقهلية</option><option>البحر الأحمر</option><option>البحيرة</option><option>الفيوم</option><option>الغربية</option><option>الإسماعيلية</option><option>المنوفية</option><option>المنيا</option><option>القليوبية</option><option>الوادي الجديد</option><option>السويس</option><option>اسوان</option><option>اسيوط</option><option>بني سويف</option><option>بورسعيد</option><option>دمياط</option><option>الشرقية</option><option>جنوب سيناء</option><option>كفر الشيخ</option><option>مطروح</option><option>الأقصر</option><option>قنا</option><option>شمال سيناء</option><option>سوهاج</option></select></div>
+          <div class="xl:col-span-1"><label class="block text-xs font-bold text-slate-700 mb-1.5">عنوان الشحن <span class="text-red-500">*</span></label><input id="address" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" required></div>
         </div>
       </div>
-
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-lg font-extrabold text-slate-800">بيانات المنتجات</h2>
-          <button type="button" onclick="addProductRow()" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-xl px-4 py-2 text-sm font-bold">إضافة منتج +</button>
-        </div>
+      <div class="section-card p-5 md:p-6 space-y-4">
+        <div class="flex items-center justify-between gap-3 flex-wrap"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fa-solid fa-box"></i></div><div><h2 class="text-lg font-extrabold text-slate-800">بيانات المنتجات</h2><p class="text-sm text-slate-500">اسم المنتج والكمية والسعر</p></div></div><button type="button" onclick="addProductRow()" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-xl px-4 py-2 text-sm font-bold">إضافة منتج +</button></div>
         <div id="products-container" class="space-y-4"></div>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">العنوان <span class="text-red-500">*</span></label>
-          <input id="address" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" required>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">ملاحظات إضافية</label>
-          <textarea id="notes" rows="2" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" placeholder="أي ملاحظات إضافية"></textarea>
+      <div class="section-card p-5 md:p-6">
+        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fa-solid fa-clipboard"></i></div><div><h2 class="text-lg font-extrabold text-slate-800">بيانات إضافية</h2><p class="text-sm text-slate-500">كود الموظف والملاحظات</p></div></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div><label class="block text-xs font-bold text-slate-700 mb-1.5">كود الموظف <span class="text-red-500">*</span></label><input id="employee-code" type="text" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" placeholder="مثال: CC01" required></div>
+          <div class="md:col-span-2"><label class="block text-xs font-bold text-slate-700 mb-1.5">ملاحظات إضافية</label><textarea id="notes" rows="2" class="w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" placeholder="أي ملاحظات إضافية"></textarea></div>
         </div>
       </div>
-
       <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-wrap justify-between items-center gap-4">
-        <div>
-          <p class="text-sm text-slate-500 font-bold">إجمالي قيمة الأوردر</p>
-          <h3 id="order-total-display" class="text-3xl font-extrabold text-blue-700 mt-1">0 ج.م</h3>
-          <input type="hidden" id="order-total-hidden" value="0">
-        </div>
-        <div class="flex gap-3">
-          <button type="button" onclick="resetFormCompletely()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-6 py-3 rounded-xl font-bold">تفريغ</button>
-          <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-xl font-bold">تسجيل الأوردر</button>
-        </div>
+        <div><p class="text-sm text-slate-500 font-bold">إجمالي قيمة الأوردر</p><h3 id="order-total-display" class="text-3xl font-extrabold text-blue-700 mt-1">0 ج.م</h3><input type="hidden" id="order-total-hidden" value="0"></div>
+        <div class="flex gap-3"><button type="button" onclick="resetFormCompletely()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-6 py-3 rounded-xl font-bold">تفريغ</button><button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-xl font-bold">تسجيل الأوردر</button></div>
       </div>
     </form>
   </div>
-
   <script>
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpCXaJZDPM_QdmKKj0lNXETIcYoQssnqS7B0tQcHooQ9iWDHVijqqnjl6XPZ6EJld4ig/exec';
-
     function normalizeEmployeeCode(value) { return String(value || '').replace(/\s+/g, '').trim().toUpperCase(); }
     function formatCurrency(value) { return `${Number(value || 0).toLocaleString('ar-EG')} ج.م`; }
-
-    function getProductRowHTML() {
-      return `
-        <div class="product-row grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
-          <div class="md:col-span-5">
-            <label class="block text-xs font-bold text-slate-700 mb-1.5">اسم المنتج <span class="text-red-500">*</span></label>
-            <input type="text" class="product-name w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" placeholder="اسم المنتج" required>
-          </div>
-          <div class="md:col-span-2">
-            <label class="block text-xs font-bold text-slate-700 mb-1.5">الكمية <span class="text-red-500">*</span></label>
-            <input type="number" min="1" value="1" class="product-qty w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" oninput="recalculateOrderTotal()" required>
-          </div>
-          <div class="md:col-span-2">
-            <label class="block text-xs font-bold text-slate-700 mb-1.5">سعر المنتج <span class="text-red-500">*</span></label>
-            <input type="number" min="0" value="0" class="product-price w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" oninput="recalculateOrderTotal()" required>
-          </div>
-          <div class="md:col-span-3">
-            <button type="button" onclick="removeProductRow(this)" class="w-full bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-xl py-2.5 text-sm font-bold transition">حذف المنتج</button>
-          </div>
-        </div>`;
-    }
-
-    function addProductRow() {
-      document.getElementById('products-container').insertAdjacentHTML('beforeend', getProductRowHTML());
-    }
-
-    function removeProductRow(button) {
-      const rows = document.querySelectorAll('.product-row');
-      if (rows.length === 1) return;
-      button.closest('.product-row').remove();
-      recalculateOrderTotal();
-    }
-
-    function recalculateOrderTotal() {
-      const rows = document.querySelectorAll('.product-row');
-      let total = 0;
-      rows.forEach(row => {
-        const qty = Number(row.querySelector('.product-qty').value || 0);
-        const price = Number(row.querySelector('.product-price').value || 0);
-        total += qty * price;
-      });
-      document.getElementById('order-total-display').innerText = formatCurrency(total);
-      document.getElementById('order-total-hidden').value = total;
-    }
-
-    async function handleOrderSubmit(event) {
-      event.preventDefault();
-      const customerName = document.getElementById('customer-name').value.trim();
-      const phone = document.getElementById('customer-phone').value.trim();
-      const employeeCode = normalizeEmployeeCode(document.getElementById('employee-code').value);
-      const governorate = document.getElementById('governorate').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const notes = document.getElementById('notes').value.trim();
-      const orderValue = Number(document.getElementById('order-total-hidden').value || 0);
-      const rows = document.querySelectorAll('.product-row');
-      const products = [];
-      const quantities = [];
-      for (const row of rows) {
-        const productName = row.querySelector('.product-name').value.trim();
-        const qty = row.querySelector('.product-qty').value.trim();
-        const price = row.querySelector('.product-price').value.trim();
-        if (!productName || !qty || price === '') { alert('من فضلك أكمل كل بيانات المنتجات.'); return; }
-        products.push(productName);
-        quantities.push(qty);
-      }
-      const payload = { action: 'insertNewOrder', customerName, phone, product: products.join(' & '), quantity: quantities.join(' & '), employeeCode, governorate, address, orderValue, notes, orderStatus: 'جاري التوصيل' };
-      try {
-        const response = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        const result = await response.json();
-        if (!result.success) throw new Error(result.message || 'Insert failed');
-        alert('تم تسجيل الأوردر بنجاح.');
-        resetFormCompletely();
-      } catch (err) {
-        console.error(err);
-        alert('فشل الاتصال بالسيرفر');
-      }
-    }
-
-    function resetFormCompletely() {
-      document.getElementById('order-form').reset();
-      document.getElementById('products-container').innerHTML = '';
-      addProductRow();
-      recalculateOrderTotal();
-    }
-
+    async function getJSON(url, options = {}) { const response = await fetch(url, { redirect: 'follow', ...options }); const text = await response.text(); try { return JSON.parse(text); } catch (e) { console.error('Invalid JSON:', text); throw new Error('استجابة غير صحيحة من السيرفر'); } }
+    function getProductRowHTML() { return `<div class="product-row grid grid-cols-1 md:grid-cols-12 gap-4 items-end"><div class="md:col-span-5"><label class="block text-xs font-bold text-slate-700 mb-1.5">اسم المنتج <span class="text-red-500">*</span></label><input type="text" class="product-name w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" placeholder="اسم المنتج" required></div><div class="md:col-span-2"><label class="block text-xs font-bold text-slate-700 mb-1.5">الكمية <span class="text-red-500">*</span></label><input type="number" min="1" value="1" class="product-qty w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" oninput="recalculateOrderTotal()" required></div><div class="md:col-span-2"><label class="block text-xs font-bold text-slate-700 mb-1.5">سعر المنتج <span class="text-red-500">*</span></label><input type="number" min="0" value="0" class="product-price w-full border-2 border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold bg-white focus:outline-none focus:border-blue-600" oninput="recalculateOrderTotal()" required></div><div class="md:col-span-3"><button type="button" onclick="removeProductRow(this)" class="w-full bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-xl py-2.5 text-sm font-bold transition">حذف المنتج</button></div></div>`; }
+    function addProductRow() { document.getElementById('products-container').insertAdjacentHTML('beforeend', getProductRowHTML()); }
+    function removeProductRow(button) { const rows = document.querySelectorAll('.product-row'); if (rows.length === 1) return; button.closest('.product-row').remove(); recalculateOrderTotal(); }
+    function recalculateOrderTotal() { const rows = document.querySelectorAll('.product-row'); let total = 0; rows.forEach(row => { const qty = Number(row.querySelector('.product-qty').value || 0); const price = Number(row.querySelector('.product-price').value || 0); total += qty * price; }); document.getElementById('order-total-display').innerText = formatCurrency(total); document.getElementById('order-total-hidden').value = total; }
+    async function handleOrderSubmit(event) { event.preventDefault(); const customerName = document.getElementById('customer-name').value.trim(); const phone = document.getElementById('customer-phone').value.trim(); const employeeCode = normalizeEmployeeCode(document.getElementById('employee-code').value); const governorate = document.getElementById('governorate').value.trim(); const address = document.getElementById('address').value.trim(); const notes = document.getElementById('notes').value.trim(); const orderValue = Number(document.getElementById('order-total-hidden').value || 0); const rows = document.querySelectorAll('.product-row'); const products = []; const quantities = []; for (const row of rows) { const productName = row.querySelector('.product-name').value.trim(); const qty = row.querySelector('.product-qty').value.trim(); const price = row.querySelector('.product-price').value.trim(); if (!productName || !qty || price === '') { alert('من فضلك أكمل كل بيانات المنتجات.'); return; } products.push(productName); quantities.push(qty); } const payload = { action: 'insertNewOrder', customerName, phone, product: products.join(' & '), quantity: quantities.join(' & '), employeeCode, governorate, address, orderValue, notes, orderStatus: 'جاري التوصيل' }; try { const result = await getJSON(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); if (!result.success) throw new Error(result.message || 'Insert failed'); alert('تم تسجيل الأوردر بنجاح.'); resetFormCompletely(); } catch (err) { console.error(err); alert('فشل الاتصال بالسيرفر'); } }
+    function resetFormCompletely() { document.getElementById('order-form').reset(); document.getElementById('products-container').innerHTML = ''; addProductRow(); recalculateOrderTotal(); }
     document.getElementById('order-form').addEventListener('submit', handleOrderSubmit);
     window.onload = () => { addProductRow(); recalculateOrderTotal(); };
   </script>
