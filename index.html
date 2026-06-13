@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تسجيل الأوردرات والمبيعات</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        body { font-family: 'Cairo', sans-serif; background-color: #f1f5f9; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8">
+
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-700 to-indigo-800 p-6 text-white text-center">
+            <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
+                <i class="fa-solid fa-basket-shopping text-blue-200"></i>
+            </div>
+            <h1 class="text-xl font-bold">إضافة أوردر مبيعات جديد</h1>
+            <p class="text-xs text-blue-100 mt-1">يرجى إدخال تفاصيل العميل بدقة وتأكيد الطلب</p>
+        </div>
+
+        <form id="orderForm" onsubmit="submitOrder(event)" class="p-6 space-y-5">
+            
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1"><i class="fa-solid fa-user text-slate-400 ml-1"></i> اسم العميل كامل <span class="text-red-500">*</span></label>
+                <input type="text" id="customerName" required class="w-full border border-slate-200 rounded-xl p-3 text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition" placeholder="مثال: محمد أحمد علي">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1"><i class="fa-solid fa-phone text-slate-400 ml-1"></i> رقم الهاتف <span class="text-red-500">*</span></label>
+                <input type="tel" id="phone" required class="w-full border border-slate-200 rounded-xl p-3 text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition text-right" placeholder="01XXXXXXXXX">
+            </div>
+
+            <div class="grid grid-cols-3 gap-4">
+                <div class="col-span-2">
+                    <label class="block text-sm font-semibold text-slate-700 mb-1"><i class="fa-solid fa-box text-slate-400 ml-1"></i> المنتج المطلوب <span class="text-red-500">*</span></label>
+                    <input type="text" id="product" required class="w-full border border-slate-200 rounded-xl p-3 text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition" placeholder="اسم المنتج أو الموديل">
+                </div>
+                <div class="col-span-1">
+                    <label class="block text-sm font-semibold text-slate-700 mb-1"><i class="fa-solid fa-layer-group text-slate-400 ml-1"></i> الكمية <span class="text-red-500">*</span></label>
+                    <input type="number" id="quantity" value="1" min="1" required class="w-full border border-slate-200 rounded-xl p-3 text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition text-center">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1"><i class="fa-solid fa-map-location-dot text-slate-400 ml-1"></i> المحافظة <span class="text-red-500">*</span></label>
+                <input type="text" id="governorate" required class="w-full border border-slate-200 rounded-xl p-3 text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition" placeholder="مثال: القاهرة، الإسكندرية...">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1"><i class="fa-solid fa-location-dot text-slate-400 ml-1"></i> العنوان بالتفصيل <span class="text-red-500">*</span></label>
+                <textarea id="address" required rows="2" class="w-full border border-slate-200 rounded-xl p-3 text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition resize-none" placeholder="الشارع، رقم العقار، الدور، الشقة، أو علامة مميزة"></textarea>
+            </div>
+
+            <div class="pt-2">
+                <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold p-3.5 rounded-xl transition shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>إرسال وتأكيد الأوردر</span>
+                </button>
+            </div>
+        </form>
+
+        <div id="statusMessage" class="hidden mx-6 mb-6 p-4 rounded-xl text-center font-semibold text-sm animate-pulse"></div>
+    </div>
+
+    <script>
+        // مـلاحـظـة: ضع رابط الـ Web App الخاص بك الناتج من جوجل شيت هنا بين علامتي التنصيص
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpCXaJZDPM_QdmKKj0lNXETIcYoQssnqS7B0tQcHooQ9iWDHVijqqnjl6XPZ6EJld4ig/exec";
+
+        async function submitOrder(event) {
+            event.preventDefault(); // منع الصفحة من إعادة التحميل الافتراضية
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMsg = document.getElementById('statusMessage');
+
+            // تفعيل حالة الانتظار لمنع الموظف من الضغط مرتين وتكرار البيانات
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> جاري تسجيل البيانات بالشيت...`;
+            statusMsg.classList.add('hidden');
+
+            // تجميع مدخلات الموظف في كائن JSON منظّم
+            const orderData = {
+                customerName: document.getElementById('customerName').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                product: document.getElementById('product').value.trim(),
+                quantity: parseInt(document.getElementById('quantity').value),
+                governorate: document.getElementById('governorate').value.trim(),
+                address: document.getElementById('address').value.trim()
+            };
+
+            try {
+                // إرسال البيانات فوراً إلى دالة doPost بجوجل شيت بدون مشاكل CORS
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // لضمان العبور الآمن بين خوادم جوجل والموقع المنفصل
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+
+                // إظهار إشعار النجاح للموظف وتصفير الاستمارة
+                statusMsg.className = "mx-6 mb-6 p-4 rounded-xl text-center font-semibold text-sm bg-green-50 text-green-700 border border-green-200 block";
+                statusMsg.innerHTML = `<i class="fa-solid fa-circle-check ml-1"></i> ممتاز! تم حفظ الأوردر وتوليد تاريخ الطلب تلقائياً في الشيت.`;
+                
+                document.getElementById('orderForm').reset(); // تصفير الحقول لأوردر جديد
+
+            } catch (error) {
+                console.error("خطأ أثناء الإرسال:", error);
+                statusMsg.className = "mx-6 mb-6 p-4 rounded-xl text-center font-semibold text-sm bg-red-50 text-red-700 border border-red-200 block";
+                statusMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation ml-1"></i> حدث خطأ في الاتصال، يرجى مراجعة رابط النشر الخاص بك.`;
+            } finally {
+                // إعادة الزر لوضعه الطبيعي بعد انتهاء المعالجة
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>إرسال وتأكيد الأوردر</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
